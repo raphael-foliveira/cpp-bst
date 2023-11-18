@@ -18,6 +18,20 @@ BinaryTree& BinaryTree::operator=(const BinaryTree& other) {
     return *this;
 }
 
+void BinaryTree::insert(int val) {
+    if (root == nullptr) {
+        root = new TreeNode(val);
+        return;
+    }
+    TreeNode* curr = root;
+}
+
+TreeNode* BinaryTree::search(int val) {
+    return searchRecursively(root, val);
+}
+
+void BinaryTree::remove(int val) {}
+
 TreeNode* BinaryTree::getRoot() {
     return root;
 }
@@ -26,3 +40,15 @@ void BinaryTree::setRoot(TreeNode* newRoot) {
     root = newRoot;
 }
 
+TreeNode* BinaryTree::searchRecursively(TreeNode* current, int searchVal) {
+    if (current == nullptr) {
+        return nullptr;
+    }
+    if (current->getVal() == searchVal) {
+        return current;
+    }
+    if (searchVal < current->getVal()) {
+        return searchRecursively(current->getLeft(), searchVal);
+    }
+    return searchRecursively(current->getRight(), searchVal);
+}
