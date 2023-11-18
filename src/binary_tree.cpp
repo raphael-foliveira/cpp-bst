@@ -9,11 +9,13 @@ BinaryTree::~BinaryTree() {
     delete root;
 }
 
-BinaryTree::BinaryTree(const BinaryTree& other) : root(other.root) {}
+BinaryTree::BinaryTree(const BinaryTree& other) : root(other.root) {
+    root = new TreeNode(*other.root);
+}
 
 BinaryTree& BinaryTree::operator=(const BinaryTree& other) {
     if (this != &other) {
-        root = other.root;
+        root = new TreeNode(*other.root);
     }
     return *this;
 }
@@ -24,6 +26,21 @@ void BinaryTree::insert(int val) {
         return;
     }
     TreeNode* curr = root;
+    while (curr != nullptr) {
+        if (val < curr->getVal()) {
+            if (curr->getLeft() == nullptr) {
+                curr->setLeft(new TreeNode(val));
+                return;
+            }
+            curr = curr->getLeft();
+        } else {
+            if (curr->getRight() == nullptr) {
+                curr->setRight(new TreeNode(val));
+                return;
+            }
+            curr = curr->getRight();
+        }
+    }
 }
 
 TreeNode* BinaryTree::search(int val) {
