@@ -76,38 +76,38 @@ TreeNode* BinaryTree::searchNode(TreeNode* current, int searchVal) {
     return searchNode(current->getRight(), searchVal);
 }
 
-TreeNode* BinaryTree::deleteNode(TreeNode* root, int val) {
-    if (root == nullptr) {
+TreeNode* BinaryTree::deleteNode(TreeNode* stRoot, int val) {
+    if (stRoot == nullptr) {
         return nullptr;
     }
-    if (root->getVal() < val) {
-        root->setRight(deleteNode(root->getRight(), val));
-        return root;
+    if (stRoot->getVal() < val) {
+        stRoot->setRight(deleteNode(stRoot->getRight(), val));
+        return stRoot;
     }
-    if (root->getVal() > val) {
-        root->setLeft(deleteNode(root->getLeft(), val));
-        return root;
+    if (stRoot->getVal() > val) {
+        stRoot->setLeft(deleteNode(stRoot->getLeft(), val));
+        return stRoot;
     }
-    bool leftIsNull = root->getLeft() == nullptr;
-    bool rightIsNull = root->getRight() == nullptr;
+    bool leftIsNull = stRoot->getLeft() == nullptr;
+    bool rightIsNull = stRoot->getRight() == nullptr;
     if (leftIsNull && rightIsNull) {
-        delete root;
+        delete stRoot;
         return nullptr;
     }
     if (leftIsNull) {
-        TreeNode* temp = new TreeNode(*root->getRight());
-        delete root;
+        TreeNode* temp = new TreeNode(*stRoot->getRight());
+        delete stRoot;
         return temp;
     }
     if (rightIsNull) {
-        TreeNode* temp = new TreeNode(*root->getLeft());
-        delete root;
+        TreeNode* temp = new TreeNode(*stRoot->getLeft());
+        delete stRoot;
         return temp;
     }
-    TreeNode* temp = findMin(root->getRight());
-    root->setVal(temp->getVal());
-    root->setRight(deleteNode(root->getRight(), temp->getVal()));
-    return root;
+    TreeNode* temp = findMin(stRoot->getRight());
+    stRoot->setVal(temp->getVal());
+    stRoot->setRight(deleteNode(stRoot->getRight(), temp->getVal()));
+    return stRoot;
 }
 
 TreeNode* BinaryTree::findMin(TreeNode* node) {
