@@ -6,7 +6,9 @@ class BinaryTree {
 private:
     TreeNode* root;
 
-    TreeNode* searchRecursively(TreeNode* current, int searchVal);
+    TreeNode* searchNode(TreeNode* current, int searchVal);
+
+    TreeNode* findMin(TreeNode* node);
 
 public:
     BinaryTree();
@@ -25,7 +27,7 @@ public:
 
     void insert(int val);
 
-    TreeNode* search(int val);
+    TreeNode* find(int val);
 
     void remove(int val);
 };

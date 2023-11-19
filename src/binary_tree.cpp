@@ -1,3 +1,4 @@
+#include <iostream>
 #include "../include/binary_tree.hpp"
 #include "../include/tree_node.hpp"
 
@@ -25,29 +26,55 @@ void BinaryTree::insert(int val) {
         root = new TreeNode(val);
         return;
     }
-    TreeNode* curr = root;
-    while (curr != nullptr) {
-        if (val < curr->getVal()) {
-            if (curr->getLeft() == nullptr) {
-                curr->setLeft(new TreeNode(val));
+    TreeNode* current = root;
+    while (current != nullptr) {
+        if (val < current->getVal()) {
+            if (current->getLeft() == nullptr) {
+                current->setLeft(new TreeNode(val));
                 return;
             }
-            curr = curr->getLeft();
+            current = current->getLeft();
         } else {
-            if (curr->getRight() == nullptr) {
-                curr->setRight(new TreeNode(val));
+            if (current->getRight() == nullptr) {
+                current->setRight(new TreeNode(val));
                 return;
             }
-            curr = curr->getRight();
+            current = current->getRight();
         }
     }
 }
 
-TreeNode* BinaryTree::search(int val) {
-    return searchRecursively(root, val);
+TreeNode* BinaryTree::find(int val) {
+    return searchNode(root, val);
 }
 
-void BinaryTree::remove(int val) {}
+void BinaryTree::remove(int val) {
+    if (root == nullptr) {
+        return;
+    }
+    TreeNode* current = root;
+
+    while (current != nullptr) {
+        TreeNode* currentLeft = current->getLeft();
+        TreeNode* currentRight = current->getRight();
+        std::cout << "current: " << current->getVal() << std::endl;
+
+        if (currentLeft != nullptr && currentLeft->getVal() == val) {
+            // delete node to the left
+        }
+
+        if (currentRight != nullptr && currentRight->getVal() == val) {
+            // delete node to the right
+        }
+
+        if (current->getVal() < val) {
+            current = currentRight;
+        } else {
+            current = currentLeft;
+        }
+    }
+
+}
 
 TreeNode* BinaryTree::getRoot() {
     return root;
@@ -57,7 +84,7 @@ void BinaryTree::setRoot(TreeNode* newRoot) {
     root = newRoot;
 }
 
-TreeNode* BinaryTree::searchRecursively(TreeNode* current, int searchVal) {
+TreeNode* BinaryTree::searchNode(TreeNode* current, int searchVal) {
     if (current == nullptr) {
         return nullptr;
     }
@@ -65,7 +92,14 @@ TreeNode* BinaryTree::searchRecursively(TreeNode* current, int searchVal) {
         return current;
     }
     if (searchVal < current->getVal()) {
-        return searchRecursively(current->getLeft(), searchVal);
+        return searchNode(current->getLeft(), searchVal);
     }
-    return searchRecursively(current->getRight(), searchVal);
+    return searchNode(current->getRight(), searchVal);
+}
+
+TreeNode* BinaryTree::findMin(TreeNode* node) {
+    while (node != nullptr && node->getLeft() != nullptr) {
+        node = node->getLeft();
+    }
+    return node;
 }
