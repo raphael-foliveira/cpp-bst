@@ -19,11 +19,7 @@ BinaryTree::BinaryTree(const BinaryTree& other) : root(other.root) {
 
 BinaryTree& BinaryTree::operator=(const BinaryTree& other) {
     if (this != &other) {
-        if (other.root != nullptr) {
-            root = new TreeNode(*other.root);
-        } else {
-            root = nullptr;
-        }
+        root = other.root == nullptr ? nullptr : new TreeNode(*other.root);
     }
     return *this;
 }

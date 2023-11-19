@@ -11,31 +11,15 @@ TreeNode::~TreeNode() {
 
 TreeNode::TreeNode(const TreeNode& other) {
     val = other.val;
-    if (other.right != nullptr) {
-        right = new TreeNode(*other.right);
-    } else {
-        right = nullptr;
-    }
-    if (other.left != nullptr) {
-        left = new TreeNode(*other.left);
-    } else {
-        left = nullptr;
-    }
+    left = other.left == nullptr ? nullptr : new TreeNode(*other.left);
+    right = other.right == nullptr ? nullptr : new TreeNode(*other.right);
 }
 
 TreeNode& TreeNode::operator=(const TreeNode& other) {
     if (this != &other) {
         val = other.val;
-        if (other.right != nullptr) {
-            right = new TreeNode(*other.right);
-        } else {
-            right = nullptr;
-        }
-        if (other.left != nullptr) {
-            left = new TreeNode(*other.left);
-        } else {
-            left = nullptr;
-        }
+        left = other.left == nullptr ? nullptr : new TreeNode(*other.left);
+        right = other.right == nullptr ? nullptr : new TreeNode(*other.right);
     }
     return *this;
 }
