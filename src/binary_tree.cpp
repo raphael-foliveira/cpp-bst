@@ -92,16 +92,18 @@ TreeNode* BinaryTree::deleteNode(TreeNode* node, int val) {
         node->setLeft(deleteNode(node->getLeft(), val));
         return node;
     }
-    if (node->getLeft() == nullptr) {
-        if (node->getRight() == nullptr) {
-            delete node;
-            return nullptr;
-        }
+    bool leftIsNull = node->getLeft() == nullptr;
+    bool rightIsNull = node->getRight() == nullptr;
+    if (leftIsNull && rightIsNull) {
+        delete node;
+        return nullptr;
+    }
+    if (leftIsNull) {
         TreeNode* temp = new TreeNode(*node->getRight());
         delete node;
         return temp;
     }
-    if (node->getRight() == nullptr) {
+    if (rightIsNull) {
         TreeNode* temp = new TreeNode(*node->getLeft());
         delete node;
         return temp;
@@ -111,8 +113,6 @@ TreeNode* BinaryTree::deleteNode(TreeNode* node, int val) {
     node->setRight(deleteNode(node->getRight(), temp->getVal()));
     return node;
 }
-
-
 
 TreeNode* BinaryTree::findMin(TreeNode* node) {
     TreeNode* current = node;
