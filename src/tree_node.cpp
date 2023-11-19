@@ -1,5 +1,4 @@
 #include "../include/tree_node.hpp"
-#include <iostream>
 
 TreeNode::TreeNode() : left(nullptr), right(nullptr), val(0) {}
 

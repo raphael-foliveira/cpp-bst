@@ -1,4 +1,3 @@
-#include <iostream>
 #include "../include/binary_tree.hpp"
 #include "../include/tree_node.hpp"
 
@@ -85,8 +84,6 @@ TreeNode* BinaryTree::deleteNode(TreeNode* node, int val) {
     if (node == nullptr) {
         return nullptr;
     }
-    std::cout << "node: " << node->getVal() << std::endl;
-    std::cout << "val: " << val << std::endl;
     if (node->getVal() < val) {
         node->setRight(deleteNode(node->getRight(), val));
         return node;
@@ -109,7 +106,6 @@ TreeNode* BinaryTree::deleteNode(TreeNode* node, int val) {
         delete node;
         return temp;
     }
-    std::cout << "deleting node with two children...\n";
     TreeNode* temp = findMin(node->getRight());
     node->setVal(temp->getVal());
     node->setRight(deleteNode(node->getRight(), temp->getVal()));
