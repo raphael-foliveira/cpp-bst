@@ -1,4 +1,5 @@
 #include "../include/tree_node.hpp"
+#include <iostream>
 
 TreeNode::TreeNode() : left(nullptr), right(nullptr), val(0) {}
 
@@ -11,15 +12,31 @@ TreeNode::~TreeNode() {
 
 TreeNode::TreeNode(const TreeNode& other) {
     val = other.val;
-    right = new TreeNode(*other.right);
-    left = new TreeNode(*other.left);
+    if (other.right != nullptr) {
+        right = new TreeNode(*other.right);
+    } else {
+        right = nullptr;
+    }
+    if (other.left != nullptr) {
+        left = new TreeNode(*other.left);
+    } else {
+        left = nullptr;
+    }
 }
 
 TreeNode& TreeNode::operator=(const TreeNode& other) {
     if (this != &other) {
         val = other.val;
-        right = new TreeNode(*other.right);
-        left = new TreeNode(*other.left);
+        if (other.right != nullptr) {
+            right = new TreeNode(*other.right);
+        } else {
+            right = nullptr;
+        }
+        if (other.left != nullptr) {
+            left = new TreeNode(*other.left);
+        } else {
+            left = nullptr;
+        }
     }
     return *this;
 }

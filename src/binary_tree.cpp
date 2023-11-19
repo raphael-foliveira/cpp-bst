@@ -11,12 +11,20 @@ BinaryTree::~BinaryTree() {
 }
 
 BinaryTree::BinaryTree(const BinaryTree& other) : root(other.root) {
-    root = new TreeNode(*other.root);
+    if (other.root != nullptr) {
+        root = new TreeNode(*other.root);
+    } else {
+        root = nullptr;
+    }
 }
 
 BinaryTree& BinaryTree::operator=(const BinaryTree& other) {
     if (this != &other) {
-        root = new TreeNode(*other.root);
+        if (other.root != nullptr) {
+            root = new TreeNode(*other.root);
+        } else {
+            root = nullptr;
+        }
     }
     return *this;
 }
@@ -49,31 +57,7 @@ TreeNode* BinaryTree::find(int val) {
 }
 
 void BinaryTree::remove(int val) {
-    if (root == nullptr) {
-        return;
-    }
-    TreeNode* current = root;
-
-    while (current != nullptr) {
-        TreeNode* currentLeft = current->getLeft();
-        TreeNode* currentRight = current->getRight();
-        std::cout << "current: " << current->getVal() << std::endl;
-
-        if (currentLeft != nullptr && currentLeft->getVal() == val) {
-            // delete node to the left
-        }
-
-        if (currentRight != nullptr && currentRight->getVal() == val) {
-            // delete node to the right
-        }
-
-        if (current->getVal() < val) {
-            current = currentRight;
-        } else {
-            current = currentLeft;
-        }
-    }
-
+    deleteNode(root, val);
 }
 
 TreeNode* BinaryTree::getRoot() {
@@ -97,9 +81,47 @@ TreeNode* BinaryTree::searchNode(TreeNode* current, int searchVal) {
     return searchNode(current->getRight(), searchVal);
 }
 
-TreeNode* BinaryTree::findMin(TreeNode* node) {
-    while (node != nullptr && node->getLeft() != nullptr) {
-        node = node->getLeft();
+TreeNode* BinaryTree::deleteNode(TreeNode* node, int val) {
+    if (node == nullptr) {
+        return nullptr;
     }
+    std::cout << "node: " << node->getVal() << std::endl;
+    std::cout << "val: " << val << std::endl;
+    if (node->getVal() < val) {
+        node->setRight(deleteNode(node->getRight(), val));
+        return node;
+    }
+    if (node->getVal() > val) {
+        node->setLeft(deleteNode(node->getLeft(), val));
+        return node;
+    }
+    if (node->getLeft() == nullptr) {
+        if (node->getRight() == nullptr) {
+            delete node;
+            return nullptr;
+        }
+        TreeNode* temp = new TreeNode(*node->getRight());
+        delete node;
+        return temp;
+    }
+    if (node->getRight() == nullptr) {
+        TreeNode* temp = new TreeNode(*node->getLeft());
+        delete node;
+        return temp;
+    }
+    std::cout << "deleting node with two children...\n";
+    TreeNode* temp = findMin(node->getRight());
+    node->setVal(temp->getVal());
+    node->setRight(deleteNode(node->getRight(), temp->getVal()));
     return node;
+}
+
+
+
+TreeNode* BinaryTree::findMin(TreeNode* node) {
+    TreeNode* current = node;
+    while (current && current->getLeft() != nullptr) {
+        current = current->getLeft();
+    }
+    return current;
 }

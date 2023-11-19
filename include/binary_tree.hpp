@@ -10,6 +10,8 @@ private:
 
     TreeNode* findMin(TreeNode* node);
 
+    TreeNode* deleteNode(TreeNode* node, int val);
+
 public:
     BinaryTree();
 
