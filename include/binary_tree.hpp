@@ -5,8 +5,11 @@
 class BinaryTree {
 private:
     TreeNode* root;
+
     TreeNode* searchNode(TreeNode* current, int searchVal);
+
     TreeNode* findMin(TreeNode* node);
+
     TreeNode* deleteNode(TreeNode* node, int val);
 
 public:
