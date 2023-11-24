@@ -58,8 +58,8 @@ void BinaryTree::printPostorder(TreeNode* node) {
     if (node == nullptr) {
         return;
     }
-    printPreorder(node->getLeft());
-    printPreorder(node->getRight());
+    printPostorder(node->getLeft());
+    printPostorder(node->getRight());
     std::cout << node->getVal() << " ";
 }
 
