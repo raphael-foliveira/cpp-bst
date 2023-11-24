@@ -14,6 +14,10 @@ private:
 
     void printInOrder(TreeNode* node);
 
+    void printPreorder(TreeNode* node);
+
+    void printPostorder(TreeNode* node);
+
 public:
     BinaryTree();
 
@@ -24,6 +28,10 @@ public:
     BinaryTree(const BinaryTree& other);
 
     void printInOrder();
+
+    void printPreorder();
+
+    void printPostorder();
 
     BinaryTree& operator=(const BinaryTree& other);
 
