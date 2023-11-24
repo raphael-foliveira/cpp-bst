@@ -14,25 +14,11 @@ int main() {
     for (int value : values) {
         tree.insert(value);
     }
+    tree.printInOrder();
 
     tree.remove(10);
 
-    for (int value : values) {
-        TreeNode* currentNode = tree.find(value);
-        if (currentNode == nullptr) {
-            continue;
-        }
-        TreeNode* left = currentNode->getLeft();
-        TreeNode* right = currentNode->getRight();
-        std::cout << "(v: [" << currentNode->getVal();
-        if (left != nullptr) {
-            std::cout << "], l: [" << left->getVal();
-        }
-        if (right != nullptr) {
-            std::cout << "], r: [" << right->getVal();
-        }
-        std::cout << "])\n";
-    }
+    tree.printInOrder();
 
     return 0;
 }
