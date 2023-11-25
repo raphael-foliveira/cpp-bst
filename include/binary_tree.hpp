@@ -12,6 +12,8 @@ private:
 
     TreeNode* deleteNode(TreeNode* node, int val);
 
+    void printInOrder(TreeNode* node);
+
 public:
     BinaryTree();
 
@@ -20,6 +22,8 @@ public:
     ~BinaryTree();
 
     BinaryTree(const BinaryTree& other);
+
+    void printInOrder();
 
     BinaryTree& operator=(const BinaryTree& other);
 

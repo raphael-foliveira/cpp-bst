@@ -1,5 +1,6 @@
 #include "../include/binary_tree.hpp"
 #include "../include/tree_node.hpp"
+#include <iostream>
 
 BinaryTree::BinaryTree() : root(nullptr) {}
 
@@ -15,6 +16,21 @@ BinaryTree::BinaryTree(const BinaryTree& other) : root(other.root) {
     } else {
         root = nullptr;
     }
+}
+
+void BinaryTree::printInOrder() {
+    std::cout << "[ ";
+    printInOrder(root);
+    std::cout << "]\n";
+}
+
+void BinaryTree::printInOrder(TreeNode* node) {
+    if (node == nullptr) {
+        return;
+    }
+    printInOrder(node->getLeft());
+    std::cout << node->getVal() << " ";
+    printInOrder(node->getRight());
 }
 
 BinaryTree& BinaryTree::operator=(const BinaryTree& other) {
