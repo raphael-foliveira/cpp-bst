@@ -33,6 +33,36 @@ void BinaryTree::printInOrder(TreeNode* node) {
     printInOrder(node->getRight());
 }
 
+void BinaryTree::printPreorder() {
+    std::cout << "[ ";
+    printPreorder(root);
+    std::cout << "]\n";
+}
+
+void BinaryTree::printPreorder(TreeNode* node) {
+    if (node == nullptr) {
+        return;
+    }
+    std::cout << node->getVal() << " ";
+    printPreorder(node->getLeft());
+    printPreorder(node->getRight());
+}
+
+void BinaryTree::printPostorder() {
+    std::cout << "[ ";
+    printPostorder(root);
+    std::cout << "]\n";
+}
+
+void BinaryTree::printPostorder(TreeNode* node) {
+    if (node == nullptr) {
+        return;
+    }
+    printPostorder(node->getLeft());
+    printPostorder(node->getRight());
+    std::cout << node->getVal() << " ";
+}
+
 BinaryTree& BinaryTree::operator=(const BinaryTree& other) {
     if (this != &other) {
         root = other.root == nullptr ? nullptr : new TreeNode(*other.root);

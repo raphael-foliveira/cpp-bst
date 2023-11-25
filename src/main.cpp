@@ -15,10 +15,14 @@ int main() {
         tree.insert(value);
     }
     tree.printInOrder();
+    tree.printPreorder();
+    tree.printPostorder();
 
     tree.remove(10);
 
     tree.printInOrder();
+    tree.printPreorder();
+    tree.printPostorder();
 
     return 0;
 }
