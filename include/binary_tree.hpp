@@ -2,7 +2,8 @@
 #define BINARY_TREE_HPP
 #include "tree_node.hpp"
 
-class BinaryTree {
+class BinaryTree
+{
 private:
     TreeNode* root;
 
