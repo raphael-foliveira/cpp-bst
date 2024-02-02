@@ -1,7 +1,8 @@
 #ifndef TREE_NODE_HPP
 #define TREE_NODE_HPP
 
-class TreeNode {
+class TreeNode
+{
 private:
     int val;
     TreeNode* left;
